@@ -1,0 +1,16 @@
+var editor = ace.edit("editor");
+
+editor.getSession().setMode("ace/mode/python");
+
+editor.setValue("print('Write your code here')");
+
+document.getElementById('editor').style.fontSize = "16px";
+
+editor.commands.addCommand({
+    name: 'Run code',
+    bindKey: {win: 'Ctrl-Return',  mac: 'Command-Return'},
+    exec: function(editor) {
+        runCode();
+    },
+    readOnly: true // false if this command should not apply in readOnly mode
+}); 

@@ -1,0 +1,76 @@
+#container {
+    position:relative;
+    width: 80%;
+    height: 800px;
+    margin: 20px auto;
+}
+
+#title {
+    text-align: center;
+}
+
+#top-main-panel {
+    position: relative;
+    width: 100%;
+    height: 80%;
+}
+
+#bottom-main-panel {
+    position: relative;
+    width: 100%;
+    height:20%;
+}
+
+#edit-panel-pre {
+    position: absolute;
+    width: 60%;
+    height: 98%;
+    top: 0;
+    left: 0;
+    margin: 0;
+
+    border: 2px solid black;
+}
+
+#edit-panel {
+    width:100%;
+    height:100%;
+    font-size:14pt;
+}
+
+#run-btn {
+    position:absolute;
+    left:60%;
+}
+
+#interpreter-panel {
+    position:absolute;
+    width: 36%;
+    height: 98%;
+    right:0;
+    overflow: auto;
+    border: 2px solid black;
+}
+
+#interpreter-panel .horizontal-divider {
+    width: 95%;
+    height: 5px;
+    margin: 10px auto;
+    background: grey;
+}
+
+#interpreter-panel .errors-output {
+    color: red;
+    font-size: 12pt;
+}
+
+#interpreter-panel .run-output {
+    color: blue;
+    font-size: 12pt;
+}
+
+#chat-panel {
+    height: 100%;
+    margin: auto;
+    border: 2px solid black;
+}

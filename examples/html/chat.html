@@ -1,0 +1,65 @@
+<html>
+<head>
+	<title>Chat</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="jquery-2.1.3.min.js"></script>
+	<script type="text/javascript">
+	var client = null;	// socket connection to server
+
+	function connect() {
+		if (client)
+			return;	// already connected
+
+		$('#chat').append('<p>Connecting to server</p>');
+		client = io();
+
+		// Handler when connected
+		client.on('connect', function() {
+			$('#chat').append('<p>Connected to server</p>');
+			// Say hi
+			client.emit('hello', $('#name').val() || 'unknown');
+		});
+
+		// Handler when lost connection
+		client.on('disconnect', function() {
+			$('#chat').append('<p>Disconnected from server</p>');
+		});
+
+		// Handler when user joins
+		client.on('hello', function(name) {
+			$('#chat').append('<p style="color:green">'+name+' joined</p>');
+		});
+
+		// Handler when user sends message
+		client.on('msg', function(data) {
+			$('#chat').append('<p>'+data.from+': '+data.msg+'</p>');
+		});
+
+		// Handler when user leaves
+		client.on('bye', function(name) {
+			$('#chat').append('<p style="color:red">'+name+' has left</p>');
+		});
+	}
+
+	// Send a message
+	function sendMessage() {
+		if (client) {
+			client.emit('msg', {
+				from: $('#name').val(), 
+				msg: $('#msg').val()
+			});
+			$('#chat').append('<p style="color:blue">'+$('#msg').val()+'</p>');
+		}
+	}
+	</script>
+</head>
+<body>
+	<h2>Chat</h2>
+	<p>Your name: <input id="name" type="text"/>
+		<button onclick='connect()'>Connect</button></p>
+	<p>Say something: <input id="msg" type="text"/>
+		<button onclick='sendMessage()'>Send</button></p>
+	<div id='chat'></div>
+</body>
+</html>
+

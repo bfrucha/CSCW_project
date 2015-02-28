@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>Test connect</title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="jquery-2.1.3.min.js"></script>
+	<script type="text/javascript">
+	var client = null;	// socket connection to server
+
+	function connect() {
+		$('#chat').append('<p>Connecting to server</p>');
+		client = io();
+
+		// Handler when connected
+		client.on('connect', function() {
+			$('#chat').append('<p>Connected to server</p>');
+		});
+
+		// Handler when lost connection
+		client.on('disconnect', function() {
+			$('#chat').append('<p>Disconnected from server</p>');
+		});
+	}
+	</script>
+</head>
+<body onload='connect()'>
+	<h2>Test connect</h2>
+	<div id='chat'></div>
+</body>
+</html>
